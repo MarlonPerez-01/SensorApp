@@ -8,7 +8,6 @@ const cors = require('cors');
 const { LuzRoutes } = require('../routes/luz.routes');
 const { TemperaturaRoutes } = require('../routes/temperatura.routes');
 const { HumedadRoutes } = require('../routes/humedad.routes');
-const { TempHumRoutes } = require('../routes/tempHum.routes');
 
 class Server {
   constructor() {
@@ -36,7 +35,7 @@ class Server {
     LuzRoutes(this.app);
     TemperaturaRoutes(this.app);
     HumedadRoutes(this.app);
-    TempHumRoutes(this.app);
+    
   }
 }
 
