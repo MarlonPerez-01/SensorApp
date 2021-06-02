@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import LinealLuz from './graficos/LinealLuz';
 import { obtener } from '../helpers/fetchLuz';
+import LinealLuz from './graficos/LinealLuz';
 
 const Luz = () => {
   const [sanSalvador, setSanSalvador] = useState([]);
@@ -12,32 +12,15 @@ const Luz = () => {
   const obtenerDatos = async () => {
     try {
       const datos = await obtener();
+      const { SanSalvador, Usulutan, Morazan, LaLibertad, LaPaz } = datos.data;
 
-      if (Object.keys(datos.data).length === 5) {
-        const sanSalvadorArr = datos.data.SanSalvador.sort(function (a, b) {
-          return a - b;
-        });
-        const usulutanArr = datos.data.Usulutan.sort(function (a, b) {
-          return a - b;
-        });
-        const morazanArr = datos.data.Morazan.sort(function (a, b) {
-          return a - b;
-        });
-        const laLibertadArr = datos.data.LaLibertad.sort(function (a, b) {
-          return a - b;
-        });
-        const laPazArr = datos.data.LaPaz.sort(function (a, b) {
-          return a - b;
-        });
+      setSanSalvador(SanSalvador);
+      setUsulutan(Usulutan);
+      setMorazan(Morazan);
+      setLaLibertad(LaLibertad);
+      setLaPaz(LaPaz);
 
-        setSanSalvador(sanSalvadorArr);
-        setUsulutan(usulutanArr);
-        setMorazan(morazanArr);
-        setLaLibertad(laLibertadArr);
-        setLaPaz(laPazArr);
-      } else {
-        //TODO: hacer algo si no se reciben los datos
-      }
+      //TODO: hacer algo si no se reciben los datos
     } catch (err) {
       console.log(err);
     }
@@ -49,29 +32,29 @@ const Luz = () => {
 
   return (
     <>
-      <div className="row mb-5">
+      <div className="row mt-4 mb-5">
         <div className="col">
-          <LinealLuz datos={sanSalvador} />
+          <LinealLuz datos={sanSalvador} titulo="San Salvador" />
         </div>
       </div>
       <div className="row mb-5">
         <div className="col">
-          <LinealLuz datos={usulutan} />
+          <LinealLuz datos={usulutan} titulo="Usulután" />
         </div>
       </div>
       <div className="row mb-5">
         <div className="col">
-          <LinealLuz datos={morazan} />
+          <LinealLuz datos={morazan} titulo="Morazán" />
         </div>
       </div>
       <div className="row mb-5">
         <div className="col">
-          <LinealLuz datos={laLibertad} />
+          <LinealLuz datos={laLibertad} titulo="La Libertad" />
         </div>
       </div>
       <div className="row mb-5">
         <div className="col">
-          <LinealLuz datos={laPaz} />
+          <LinealLuz datos={laPaz} titulo="La Paz" />
         </div>
       </div>
     </>
