@@ -6,7 +6,7 @@ const idSchema = Joi.object({
 
 const intervaloSchema = Joi.object({
   desde: Joi.number().positive(),
-  limite: Joi.number().positive()
+  limite: Joi.number().positive().min(720)
 });
 
 module.exports = {

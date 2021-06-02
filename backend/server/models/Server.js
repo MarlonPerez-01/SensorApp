@@ -35,7 +35,6 @@ class Server {
     LuzRoutes(this.app);
     TemperaturaRoutes(this.app);
     HumedadRoutes(this.app);
-    
   }
 }
 

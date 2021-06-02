@@ -1,21 +1,31 @@
 const { Seleccionar } = require('../models/Temperatura');
+const { obtenerPromediosTemp } = require('../helpers/Promedios');
 
 const seleccionar = async (req, res) => {
   let { desde, limite } = res.locals.queryValidado;
-
-  //Se resta uno porque inicia en la posicion cero, si no manda nada por defecto sera cero.
   desde = desde - 1 || 0;
-
-  //si no manda nada el cliente, por defecto el limite seran diez registros
-  limite = limite || 100;
+  limite = limite || 720;
 
   try {
     const data = await Seleccionar(desde, limite);
 
+    //promedios ordenados de mas antiguo hasta mas reciente (tiempo)
+    const Ahuchapan = obtenerPromediosTemp(data.Ahuchapan);
+    const Chalatenango = obtenerPromediosTemp(data.Chalatenango);
+    const SantaAna = obtenerPromediosTemp(data.SantaAna);
+    const Sonsonate = obtenerPromediosTemp(data.Sonsonate);
+    const SanMiguel = obtenerPromediosTemp(data.SanMiguel);
+
     if (data) {
       return res.json({
         msg: 'Registros obtenidos',
-        data: data
+        data: {
+          Ahuchapan,
+          Chalatenango,
+          SantaAna,
+          Sonsonate,
+          SanMiguel
+        }
       });
     }
 
