@@ -6,7 +6,7 @@ En la raíz de la carpeta backend se puede ejecutar en una terminal:
 
 Instalar las dependencias:
 
-#####`npm start`
+##### `npm start`
 
 Inicia el servidor en [http://localhost:8000](http://localhost:8000)
 
