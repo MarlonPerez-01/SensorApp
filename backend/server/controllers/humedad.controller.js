@@ -39,6 +39,9 @@ const seleccionar = async (req, res) => {
   }
 };
 
+
+
+
 module.exports = {
   seleccionar
 };

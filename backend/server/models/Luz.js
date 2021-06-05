@@ -29,6 +29,18 @@ const Seleccionar = async (desde, limite) => {
   }
 };
 
+const Insertar = async (nuevaLuz) => {
+  try {
+    const query = `INSERT INTO SanSalvador SET ?`;
+    const data = await promisePool.query(query, nuevaLuz);
+
+    return data;
+  } catch (err) {
+    throw err;
+  }
+};
+
 module.exports = {
-  Seleccionar
+  Seleccionar,
+  Insertar
 };

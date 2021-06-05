@@ -1,4 +1,4 @@
-const { Seleccionar } = require('../models/Luz');
+const { Seleccionar, Insertar } = require('../models/Luz');
 const { obtenerPromediosLuz } = require('../helpers/Promedios');
 
 const seleccionar = async (req, res) => {
@@ -33,6 +33,28 @@ const seleccionar = async (req, res) => {
   }
 };
 
+const insertar = async (req, res) => {
+  const nuevaLuz = res.locals.bodyValidado;
+
+  try {
+    const data = await Insertar(nuevaLuz);
+    data[0].affectedRows === 1
+      ? res.json({
+          msg: 'El registro ha sido insertado',
+
+          data: { id: data[0].insertId, ...nuevaLuz }
+        })
+      : res.status(400).json({
+          ok: false,
+          msg: 'El registro no fue insertado'
+        });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ msg: 'Comuniquese con el administrador' });
+  }
+};
+
 module.exports = {
-  seleccionar
+  seleccionar,
+  insertar
 };
